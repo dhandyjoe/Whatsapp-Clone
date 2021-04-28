@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.currentItem = 0
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
