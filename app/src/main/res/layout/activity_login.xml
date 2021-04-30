@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.LoginActivity">
 
-
-
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="300dp"
@@ -17,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <TextView
             android:id="@+id/textView2"
@@ -74,6 +71,5 @@
             android:text="LOGIN" />
 
     </RelativeLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
