@@ -1,10 +1,15 @@
 package com.example.whatsapp_clone.activity
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.databinding.ActivityLoginBinding
+import com.google.android.material.internal.ContextUtils.getActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,6 +24,5 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
 }

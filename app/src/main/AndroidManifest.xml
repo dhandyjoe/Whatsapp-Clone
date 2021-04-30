@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsappClone">
         <activity android:name=".activity.SignupActivity" />
-        <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
