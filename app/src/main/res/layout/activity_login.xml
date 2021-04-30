@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:layout_marginStart="66dp"
         android:layout_marginEnd="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,10 +65,20 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/et_password"
             android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
             android:text="LOGIN" />
+
+        <TextView
+            android:id="@+id/tv_signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have account? Sign Up now"
+            android:textColor="#086B29"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/btn_login"/>
 
     </RelativeLayout>
 
