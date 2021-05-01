@@ -74,10 +74,10 @@
             android:id="@+id/tv_signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have account? Sign Up now"
+            android:text="Don't have account? Sign Up"
             android:textColor="#086B29"
             android:layout_marginTop="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/btn_login"/>
 
     </RelativeLayout>
