@@ -1,16 +1,20 @@
 package com.example.whatsapp_clone.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.adapter.ViewPagerAdapter
 import com.example.whatsapp_clone.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     var viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+    private var firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +33,20 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_logout -> onLogout()
+        }
+
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun onLogout() {
+        firebaseAuth.signOut()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }
