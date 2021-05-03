@@ -59,7 +59,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textEmailAddress" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btn_login"
