@@ -8,6 +8,7 @@ import android.view.MenuItem
 import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.adapter.ViewPagerAdapter
 import com.example.whatsapp_clone.databinding.ActivityMainBinding
+import com.example.whatsapp_clone.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -38,8 +39,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_logout -> onLogout()
+            R.id.action_profile -> startActivity(Intent(this, ProfileActivity::class.java))
         }
-
 
         return super.onOptionsItemSelected(item)
     }
