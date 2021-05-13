@@ -16,31 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:ems="12"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -53,49 +28,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilNameProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="0dp"
+        <EditText
+            android:id="@+id/et_name_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:ems="14"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmailProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Phone"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilNameProfile"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/et_email_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="14"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/tilNameProfile"
+            app:layout_constraintStart_toStartOf="@+id/tilNameProfile"
+            app:layout_constraintTop_toBottomOf="@+id/tilNameProfile" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPhoneProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilEmailProfile"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+        <EditText
+            android:id="@+id/et_phone_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="14"
+            android:hint="Phone"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_apply"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Apply"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
-        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+        app:layout_constraintEnd_toEndOf="@+id/tilPhoneProfile"
+        app:layout_constraintStart_toStartOf="@+id/tilPhoneProfile"
+        app:layout_constraintTop_toBottomOf="@+id/tilPhoneProfile" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_delete_account"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="Delete Account"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_apply"
+        app:layout_constraintStart_toStartOf="@+id/btn_apply"
+        app:layout_constraintTop_toBottomOf="@+id/btn_apply" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
