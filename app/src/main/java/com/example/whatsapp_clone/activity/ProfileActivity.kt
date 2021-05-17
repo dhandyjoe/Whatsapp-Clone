@@ -1,6 +1,9 @@
 package com.example.whatsapp_clone.activity
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -14,11 +17,13 @@ import com.example.whatsapp_clone.databinding.ActivityProfileBinding
 import com.example.whatsapp_clone.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private val firebaseDB =  FirebaseFirestore.getInstance()
+    private val firebaseStorage = FirebaseStorage.getInstance().reference
     private val userID  = FirebaseAuth.getInstance().currentUser?.uid
     private var imageUrl: String? = null
 
@@ -35,7 +40,11 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.btnApply.setOnClickListener{ apply() }
         binding.btnDeleteAccount.setOnClickListener { delete() }
-        binding.
+        binding.ivPhotoProfile.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE_PHOTO)
+        }
     }
 
     private fun userInfo() {
@@ -49,7 +58,7 @@ class ProfileActivity : AppCompatActivity() {
                 binding.etEmailProfile.setText(user?.email)
                 binding.etPhoneProfile.setText(user?.phone)
                 if (imageUrl != null) {
-                    userImage(this, )
+                    userImage(this, user?.imageUrl!!, binding.ivPhotoProfile)
                 }
             }
     }
@@ -90,13 +99,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun userImage(context: Context, uri: String, imageView: ImageView) {
-        if (context != null) {
-            val option = RequestOptions().placeholder(progresDrawable(context))
-            Glide.with(context)
-                .load(uri)
-                .apply(option)
-                .into(imageView)
-        }
+        val option = RequestOptions().placeholder(progresDrawable(context))
+        Glide.with(context)
+            .load(uri)
+            .apply(option)
+            .into(imageView)
     }
 
     private fun progresDrawable(context: Context): CircularProgressDrawable {
@@ -104,6 +111,41 @@ class ProfileActivity : AppCompatActivity() {
             strokeWidth = 5f
             centerRadius = 30f
             start()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_PHOTO) {
+            storeImage(data?.data)
+        }
+    }
+
+    private fun storeImage(imageUri: Uri?) {
+        if (imageUri != null) {
+            Toast.makeText(this, "Uploading...", Toast.LENGTH_SHORT).show()
+            val filePath = firebaseStorage.child(DATA_IMAGES).child(userID!!)
+
+            filePath.putFile(imageUri)
+                .addOnSuccessListener {
+                    filePath.downloadUrl
+                        .addOnSuccessListener { taskSnapshot ->
+                            val url = taskSnapshot.toString()
+                            firebaseDB.collection(DATA_USERS)
+                                .document(userID)
+                                .update(DATA_USER_IMAGE_URL, url)
+                                .addOnSuccessListener {
+                                    imageUrl = url
+                                    userImage(this, imageUrl!!, binding.ivPhotoProfile)
+                                }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Image Upload failed. Please try again later.", Toast.LENGTH_SHORT).show()
+                        }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Image Upload failed. Please try again later.", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }
