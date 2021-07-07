@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.adapter.ViewPagerAdapter
 import com.example.whatsapp_clone.databinding.ActivityMainBinding
@@ -28,6 +29,16 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.currentItem = 0
+
+        resizeTab()
+
+    }
+
+    private fun resizeTab() {
+        val layout = (binding.tabLayout.getChildAt(0) as LinearLayout).getChildAt(0) as LinearLayout
+        val layoutParams = layout.layoutParams as LinearLayout.LayoutParams
+        layoutParams.weight = 0.4f
+        layout.layoutParams = layoutParams
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
