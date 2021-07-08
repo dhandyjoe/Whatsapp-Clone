@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsappClone">
-        <activity android:name=".activity.ProfileActivity"></activity>
+        <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.SignupActivity" />
         <activity
             android:name=".activity.LoginActivity"

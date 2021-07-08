@@ -12,21 +12,21 @@ class ViewPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
     val statusFragment = StatusFragment()
 
     override fun getCount(): Int {
-        return 3
+        return 2
     }
 
     override fun getItem(position: Int): Fragment {
         when(position) {
-            1 -> return chatFragment
-            2 -> return statusFragment
+            0 -> return chatFragment
+            1 -> return statusFragment
         }
         return chatFragment
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
         when(position) {
-            1 -> return "Chat"
-            2 -> return "Status"
+            0 -> return "Chat"
+            1 -> return "Status"
         }
         return null
     }

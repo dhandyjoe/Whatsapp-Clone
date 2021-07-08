@@ -30,15 +30,6 @@ class MainActivity : AppCompatActivity() {
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.currentItem = 0
 
-        resizeTab()
-
-    }
-
-    private fun resizeTab() {
-        val layout = (binding.tabLayout.getChildAt(0) as LinearLayout).getChildAt(0) as LinearLayout
-        val layoutParams = layout.layoutParams as LinearLayout.LayoutParams
-        layoutParams.weight = 0.4f
-        layout.layoutParams = layoutParams
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
