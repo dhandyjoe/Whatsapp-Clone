@@ -14,7 +14,6 @@ import com.example.whatsapp_clone.databinding.ActivityLoginBinding
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.firebase.auth.FirebaseAuth
 
-@Suppress("UNREACHABLE_CODE")
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
