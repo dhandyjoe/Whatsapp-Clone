@@ -37,6 +37,22 @@ class MainActivity : AppCompatActivity() {
         binding.tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager))
         resizeTab()
         binding.tabs.getTabAt(1)?.select()
+
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.position) {
+                    0 -> {binding.fabMain.hide()}
+                    1 -> {binding.fabMain.show()}
+                    2 -> {binding.fabMain.hide()}
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
     }
 
     private fun resizeTab() {

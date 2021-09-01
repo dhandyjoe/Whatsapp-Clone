@@ -27,7 +27,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:tabIndicatorColor="#fff"
-        app:tabTextColor="#fff" >
+        app:tabTextColor="#fff"
+        app:tabIconTint="#fff">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
@@ -50,6 +51,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#F8F8F8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
