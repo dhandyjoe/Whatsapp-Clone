@@ -1,17 +1,11 @@
 package com.example.whatsapp_clone.activity
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.databinding.ActivityLoginBinding
-import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -39,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             if(proceed) {
                 signIn()
             }
-        }
+         }
 
         binding.tvSignUp.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
