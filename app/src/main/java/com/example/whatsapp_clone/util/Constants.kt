@@ -1,6 +1,8 @@
 package com.example.whatsapp_clone.util
 
 val REQUEST_CODE_PHOTO = 0
+val PERMISSION_REQUEST_CONTACTS = 123
+
 
 val DATA_USERS = "Users"
 val DATA_USER_NAME = "name"
