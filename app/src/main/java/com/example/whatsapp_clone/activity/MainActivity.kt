@@ -77,11 +77,11 @@ class MainActivity : AppCompatActivity() {
                     .setMessage("This app requires access to your contacts to initiate a conversation.")
                     .setPositiveButton("Ask Me!") { _, _ -> reqeustContactPermission()}
                     .setNegativeButton("No") { _, _ -> }
-
+                    .show()
             }
         } else {
             // Permission granted
-
+            reqeustContactPermission()
         }
     }
 
@@ -94,10 +94,11 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode) {
             PERMISSION_REQUEST_CONTACTS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                    val intent = Intent(this, ContactActivity::class.java)
                 }
             }
         }
