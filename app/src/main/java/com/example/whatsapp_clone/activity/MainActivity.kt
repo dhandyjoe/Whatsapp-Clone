@@ -66,8 +66,6 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
-
-
     }
 
     fun onNewChat() {
@@ -89,6 +87,20 @@ class MainActivity : AppCompatActivity() {
 
     fun reqeustContactPermission () {
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), PERMISSION_REQUEST_CONTACTS)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode) {
+            PERMISSION_REQUEST_CONTACTS -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                }
+            }
+        }
     }
 
     private fun resizeTab() {

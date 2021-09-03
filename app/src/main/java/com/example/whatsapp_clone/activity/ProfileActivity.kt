@@ -12,8 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.databinding.ActivityProfileBinding
+import com.example.whatsapp_clone.model.User
 import com.example.whatsapp_clone.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

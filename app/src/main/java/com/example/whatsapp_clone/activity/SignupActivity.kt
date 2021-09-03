@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.whatsapp_clone.databinding.ActivitySignupBinding
 import com.example.whatsapp_clone.util.DATA_USERS
-import com.example.whatsapp_clone.util.User
+import com.example.whatsapp_clone.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
