@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.whatsapp_clone.adapter.ContactAdapter
 import com.example.whatsapp_clone.databinding.ActivityContactBinding
 import com.example.whatsapp_clone.model.Contacts
@@ -18,6 +19,9 @@ class ContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+
+        binding.toolbar.title = "Whatsapp Clone"
 
         getContact()
     }
@@ -41,6 +45,7 @@ class ContactActivity : AppCompatActivity() {
 
     fun setupList() {
         binding.llProgressBar.visibility = View.GONE
+        binding.rvContacts.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val data = ContactAdapter(contactList)
         binding.rvContacts.adapter = data
 
@@ -51,7 +56,6 @@ class ContactActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-
         })
     }
 }

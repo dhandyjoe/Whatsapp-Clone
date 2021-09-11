@@ -1,12 +1,15 @@
 package com.example.whatsapp_clone.activity
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.Placeholder
 import androidx.core.app.ActivityCompat
@@ -22,6 +25,7 @@ import com.example.whatsapp_clone.fragment.ChatFragment
 import com.example.whatsapp_clone.fragment.StatusFragment
 import com.example.whatsapp_clone.fragment.StatusUpdateFragment
 import com.example.whatsapp_clone.util.PERMISSION_REQUEST_CONTACTS
+import com.example.whatsapp_clone.util.PERMISSION_REQUEST_NEW_CHAT
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private val chatsFragment = ChatFragment()
     private val statusFragment = StatusFragment()
     private val statusUpdateFragment = StatusUpdateFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +71,10 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+
+        binding.fabMain.setOnClickListener {
+            onNewChat()
+        }
     }
 
     fun onNewChat() {
@@ -78,10 +87,13 @@ class MainActivity : AppCompatActivity() {
                     .setPositiveButton("Ask Me!") { _, _ -> reqeustContactPermission()}
                     .setNegativeButton("No") { _, _ -> }
                     .show()
+            } else {
+                reqeustContactPermission()
             }
         } else {
             // Permission granted
-            reqeustContactPermission()
+            val intent = Intent(this, ContactActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -99,6 +111,7 @@ class MainActivity : AppCompatActivity() {
             PERMISSION_REQUEST_CONTACTS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     val intent = Intent(this, ContactActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }
