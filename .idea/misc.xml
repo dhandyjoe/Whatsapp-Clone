@@ -10,13 +10,14 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.17962962962962964" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.17314814814814813" />
         <entry key="app/src/main/res/layout/fragment_status_update.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/item_chats.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/layout/item_chats.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_contact.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/menu/menu_main_activity.xml" value="0.17962962962962964" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21875" />
       </map>
     </option>
   </component>
