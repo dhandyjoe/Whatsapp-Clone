@@ -1,5 +1,6 @@
 package com.example.whatsapp_clone.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.whatsapp_clone.R
 import com.example.whatsapp_clone.adapter.ChatsAdpater
 import com.example.whatsapp_clone.databinding.FragmentChatBinding
+import com.example.whatsapp_clone.model.Chat
+import com.example.whatsapp_clone.util.DATA_USERS
+import com.example.whatsapp_clone.util.DATA_USER_CHATS
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +31,11 @@ class ChatFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentChatBinding
-    private var chatData = arrayListOf<String>("Dhandy Joenathan", "Jenny Erine", "Elyn", "Joko", "Kristin")
+    private val firebaseDB = FirebaseFirestore.getInstance()
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid
+    private lateinit var thisContext: Context
+    private var chatAdapter: ChatsAdpater? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +49,90 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        thisContext = container!!.context
+        chatAdapter = ChatsAdpater(arrayListOf(), thisContext)
         binding = FragmentChatBinding.inflate(inflater, container, false)
 
-        binding.rvChats.layoutManager = LinearLayoutManager(activity)
-        binding.rvChats.adapter = ChatsAdpater(chatData)
+        firebaseDB.collection(DATA_USERS).document(userId!!).addSnapshotListener {it, firebaseException ->
+            if (firebaseException == null) {
+                refreshChat()
+            }
+        }
 
 
         return binding.root
     }
 
-    fun newChat (partnerID: String){}
+    private fun refreshChat() {
+        firebaseDB.collection(DATA_USERS)
+            .document(userId!!)
+            .get()
+            .addOnSuccessListener {
+                if (it.contains(DATA_USER_CHATS)) {
+                    val partners = it[DATA_USER_CHATS]
+                    val chat = arrayListOf<String>()
+                    for (partner in (partners as HashMap<String, String>).keys) {
+                        if (partners[partner] != null) {
+                            chat.add(partners[partner]!!)
+                        }
+                    }
+                    chatAdapter?.chatUpdate(chat)
+                }
+
+                binding.rvChats.layoutManager = LinearLayoutManager(activity)
+                binding.rvChats.adapter = chatAdapter
+
+            }
+    }
+
+    fun newChat (partnerID: String) {
+        firebaseDB.collection(DATA_USERS)
+            .document(userId!!)
+            .get()
+            .addOnSuccessListener {
+                val userChatPartners = hashMapOf<String, String>()
+                if (it[DATA_USER_CHATS] != null && it[DATA_USER_CHATS] is HashMap<*, *>) {
+                    val userDocumentMap = it[DATA_USER_CHATS] as HashMap<String, String>
+                    if (userDocumentMap.containsKey(partnerID)) {
+                        return@addOnSuccessListener
+                    } else {
+                        userChatPartners.putAll(userDocumentMap)
+                    }
+                }
+
+                firebaseDB.collection(DATA_USERS)
+                    .document(partnerID)
+                    .get()
+                    .addOnSuccessListener { partnerDocument ->
+                        val partnerChatPartners = hashMapOf<String, String>()
+                        if (partnerDocument[DATA_USER_CHATS] != null && partnerDocument[DATA_USER_CHATS] is HashMap<*, *>) {
+                            val partnerDocumentMap = partnerDocument[DATA_USER_CHATS] as HashMap<String, String>
+                            partnerChatPartners.putAll(partnerDocumentMap)
+                        }
+
+                        val chatParticipant = arrayListOf(userId, partnerID)
+                        val chat = Chat(chatParticipant)
+                        val chatRef = firebaseDB.collection(DATA_USER_CHATS).document()
+                        val userRef = firebaseDB.collection(DATA_USERS).document(userId)
+                        val partnerRef = firebaseDB.collection(DATA_USERS).document(partnerID)
+
+                        userChatPartners[partnerID] = chatRef.id
+                        partnerChatPartners[userId] = chatRef.id
+
+                        val batch = firebaseDB.batch()
+                        batch.set(chatRef, chat)
+                        batch.update(userRef, DATA_USER_CHATS, userChatPartners)
+                        batch.update(partnerRef, DATA_USER_CHATS, partnerChatPartners)
+                        batch.commit()
+                    }
+                    .addOnFailureListener { e ->
+                        e.printStackTrace()
+                    }
+            }
+            .addOnFailureListener { e ->
+                e.printStackTrace()
+            }
+    }
 
 
     companion object {

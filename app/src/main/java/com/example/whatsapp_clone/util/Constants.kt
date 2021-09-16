@@ -15,4 +15,7 @@ val DATA_USER_STATUS = "status"
 val DATA_USER_STATUS_URL = "statusUrl"
 val DATA_USER_STATUS_TIME = "statusTime"
 
+val DATA_USER_CHATS = "userChats"
+val DATA_CHATS_PARTICIPANTS = "chatParticipants"
+
 val DATA_IMAGES = "Image"

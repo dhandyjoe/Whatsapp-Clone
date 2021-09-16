@@ -74,7 +74,8 @@ class ContactActivity : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener {
                     if (it.documents.size > 0) {
-                        Toast.makeText(this, "ada nomer", Toast.LENGTH_SHORT).show()
+                        chatsFragment.newChat(it.documents[0].id)
+                        onBackPressed()
                     } else {
                         AlertDialog.Builder(this)
                             .setTitle("User not found")
